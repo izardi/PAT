@@ -13,13 +13,23 @@ int main(){
     scanf("%d", &B);
     if(B != 1){
         int tmp, k=1;
-        tmp = (A[k-1]*10+A[k]);
-        C[k-1] = tmp/B;
-        tmp = tmp % B;
-        for(k=2; k<i; k++){
-            tmp = tmp*10 + A[k];
+        if (A[0]/B > 0){
+            C[k-1] = A[0]/B;
+            tmp = A[0]%B;
+            for(k=1; k<i; k++){
+                tmp = tmp*10 + A[k];
+                C[k-1] = tmp/B;
+                tmp = tmp%B;
+            }
+        }else {
+            tmp = (A[k-1]*10+A[k]);
             C[k-1] = tmp/B;
-            tmp = tmp%B;
+            tmp = tmp % B;
+            for(k=2; k<i; k++){
+                tmp = tmp*10 + A[k];
+                C[k-1] = tmp/B;
+                tmp = tmp%B;
+            }
         }
         for(int j=0; j<k-1; j++){
             printf("%d",C[j]);
