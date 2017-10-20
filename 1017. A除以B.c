@@ -13,12 +13,12 @@ int main(){
     scanf("%d", &B);
     if(B != 1){
         int tmp, k=1;
-        if (A[0]/B > 0){
+        if (A[0] >= B){
             C[k-1] = A[0]/B;
             tmp = A[0]%B;
             for(k=1; k<i; k++){
                 tmp = tmp*10 + A[k];
-                C[k-1] = tmp/B;
+                C[k] = tmp/B;
                 tmp = tmp%B;
             }
         }else {
