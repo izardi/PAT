@@ -48,15 +48,14 @@ bool isSame(const char* array){
 int main(){
     char *array = (char*)malloc(bit*sizeof(char));
     int i=0;
-    while(scanf("%c",&array[i]) !=EOF){
-        i++;
+    char c;
+    scanf("%c", &c);
+    while(c !='\n'){
+        array[i++] = c;
+        scanf("%c", &c);
     }
-    if(i != 4){
-        for(int j = i; j<=bit; j++){
-            char tmp = array[j-1];
-            array[j] = array[j-1];
-            array[j-1]  = array[j-2];
-        }
+    while(i != bit){
+        array[i++] = '0';
     }
     int max, min, result=0;
     if(isSame(array)) {
