@@ -66,7 +66,7 @@ int main(){
             max = (strTonum(strMaxSort(array)));
             min = (strTonum(strMinSort(array)));
             result = max - min;
-            printf("%04d - %04d = %d\n",max,min,result);
+            printf("%04d - %04d = %04d\n",max,min,result);
             numToStr(result,array);
         }
     }
