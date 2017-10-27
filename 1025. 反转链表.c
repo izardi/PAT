@@ -15,12 +15,12 @@ int main(){
     Head -> next = NULL;
     LNode tmpHeadPtr = Head;
     scanf("%d %d %d", &FirstAddress, &N, &K);
-    for(int i=0; i<6; i++){
+    for(int i=0; i<N; i++){
         LNode tmpNode = (LNode)malloc(sizeof(struct Node));
         scanf("%d %d %d", &tmpNode->Address, &tmpNode->Data, &tmpNode->NextAddress);
         tmpNode->next = NULL;
         tmpHeadPtr->next = tmpNode;
-        tmpHeadPtr = tmpHeadPtr->next;
+        tmpHeadPtr = tmpNode;
     } //read finished
     //sort
     int count = 0;
@@ -46,31 +46,31 @@ int main(){
     Head = tmpList;
     // srot complated!
     //reverse
-    LNode tmpHead = (LNode)malloc(sizeof(struct Node));
-    tmpHead->next = NULL;
-    tmpHeadPtr = tmpHead;
-    LNode tmp = Head;
-    LNode tail, tmpOld;
-    while(count >=K){
+    tmpList = (LNode)malloc(sizeof(struct Node));
+    tmpList->next = NULL;
+    tmpListPtr = tmpList;
+    tmpHeadPtr = Head;
+    LNode tail,tmpNode;
+    while(count >= K){
         count -= K;
-        for(int i=0; i< K; i++){
-            tmpHeadPtr->next = tmp->next;
-            tmp->next = tmp->next->next;
+        for(int i =0; i<K; i++){
+            tmpListPtr->next = tmpHeadPtr->next;
+            tmpHeadPtr->next = tmpHeadPtr->next->next;
             if(i==0)
-                tail = tmpHeadPtr->next;
+                tail = tmpListPtr->next;
             else
-                tmp->next->next = tmpOld;
-            tmpOld = tmpHeadPtr->next;
+                tmpListPtr->next->next = tmpNode;
+            tmpNode = tmpListPtr->next;
         }
-        tmpHeadPtr = tail;
+        tmpListPtr = tail;
     }
-    tmpHeadPtr->next = Head->next;
-    tmpHeadPtr = tmpHead->next;
+    tmpListPtr->next = Head->next;
+    Head = tmpList->next;
 
-    while(tmpHeadPtr->next){
-        printf("%05d %d %05d\n", tmpHeadPtr->Address, tmpHeadPtr->Data, tmpHeadPtr->next->Address);
-        tmpHeadPtr = tmpHeadPtr->next;
+    while(Head->next){
+        printf("%05d %d %05d\n", Head->Address, Head->Data, Head->next->Address);
+        Head = Head->next;
     }
-    printf("%05d %d -1", tmpHeadPtr->Address,tmpHeadPtr->Data);
+    printf("%05d %d -1", Head->Address,Head->Data);
     return 0;
 }
