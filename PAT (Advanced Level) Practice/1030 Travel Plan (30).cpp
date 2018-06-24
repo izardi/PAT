@@ -1,7 +1,4 @@
 #include <cstdio>
-#include <cstring>
-#include <algorithm>
-using namespace std;
 const int MAXV = 510;
 const int INF = 10000000;
 
@@ -10,16 +7,19 @@ struct node{
     int distance;
     int toll;
 }G[MAXV][MAXV];
+
 int dis[MAXV], cost[MAXV];
 bool vis[MAXV] = {false};
 int road[MAXV];
+
 void Dijkstra(int s){
-    fill(dis, dis+MAXV, INF);
-    fill(cost, cost+MAXV, INF);
+	for(int i = 0; i < N; i++) road[i] = i;
+	dis[s] = 0;
+	cost[s] = 0;
     for(int i = 0; i < N; i++){
         int u = -1, Min = INF;
         for(int j = 0; j < N; j++){
-            if(vis[j] == false && dis[j] < Min){
+            if(!vis[j] && dis[j] < Min){
                 Min = dis[j];
                 u = j;
             }
@@ -27,7 +27,7 @@ void Dijkstra(int s){
         if(u == -1) return;
         vis[u] = true;
         for(int v = 0; v < N; v++){
-            if(vis[v] = false && G[u][v].distance != INF){
+            if(!vis[v] && G[u][v].distance != INF){
                 if(dis[u] + G[u][v].distance < dis[v]){
                     dis[v] = dis[u] + G[u][v].distance;
                     cost[v] = cost[u] + G[u][v].toll;
@@ -56,16 +56,21 @@ void DFS(int v){
 int main(){
     scanf("%d %d %d %d",&N, &M, &S, &D);
     int u, v;
-    for(int i = 0; i < N; i++)
-        for(int j = 0; j < N; j++)
+    
+	for(int i = 0; i < N; i++){
+        cost[i] = dis[i] = INF;
+		for(int j = 0; j < N; j++)
             G[i][j].distance = G[i][j].toll = INF;
-    for(int i = 0; i < M; i++){
+	}
+    
+	for(int i = 0; i < M; i++){
         scanf("%d %d", &u, &v);
         scanf("%d %d", &G[u][v].distance, &G[u][v].toll);
         G[v][u].distance = G[u][v].distance;
         G[v][u].toll = G[u][v].toll;
     }
-    Dijkstra(S);
+    
+	Dijkstra(S);
     DFS(D);
     printf("%d %d\n", dis[D], cost[D]);
     return 0;
