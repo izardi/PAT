@@ -50,46 +50,42 @@ int main(){
             if(table[j].ET < minTime){
                 minTime = table[j].ET;
                 minidx = j;
-                if(table[j].vip){
-                    havevip = j;
-                    break;
-                }
+                if(table[j].vip) havevip = j;
+                else havevip = 0;
             }
-            else if(table[j].ET == minTime){
-                if(table[j].vip){
+            else if(table[j].ET == minTime)
+                if(table[j].vip)
                     havevip = j;
-                    break;
-                }
-            }
         }//找到最早结束的并且判断是否是vip如果有同时结束的找到第一个vip的桌子
         if(table[minidx].ET >= 75600) break;
         int early_cus;
         int flag = 0;
-        for(j = 0; j < len && !vis[j]; j++){
-                if(!flag){
+        for(j = 0; j < len ; j++){
+            if(vis[j]) continue;
+            if(!flag){
+                early_cus = j;
+                flag = 1;
+            }
+            if(array[j].AT <= minTime){
+                if(array[j].vip){
                     early_cus = j;
-                    flag = 1;
+                    break;
                 }
-                if(array[j].AT <= minTime){
-                    if(array[j].vip){
-                        early_cus = j;
-                        break;
-                    }
-                }
-                else break;
+            }
+            else break;
         }//找到最先服务的人
         vis[early_cus] = true;
         printf("%02d:%02d:%02d ", array[early_cus].AT/3600, array[early_cus].AT%3600/60,
-                                    array[early_cus].AT%60);
+               array[early_cus].AT%60);
         if(array[early_cus].vip && havevip){//最先服务的人是vip并且有vip位子
             if(array[early_cus].AT >= table[havevip].ET ){//最早服务的来时桌子闲着
                 printf("%02d:%02d:%02d ", array[early_cus].AT/3600, array[early_cus].AT%3600/60,
-                                array[early_cus].AT%60);
+                       array[early_cus].AT%60);
                 printf("0\n");
                 table[havevip].ET = array[early_cus].AT + array[early_cus].PT;
             }else{//最早服务的来时桌子没闲着要等待
                 printf("%02d:%02d:%02d ", table[havevip].ET/3600, table[havevip].ET%3600/60,
-                                            table[havevip].ET%60);
+                       table[havevip].ET%60);
                 printf("%d\n", (table[havevip].ET-array[early_cus].AT + 30)/60);
                 table[havevip].ET += array[early_cus].PT;
             }
@@ -98,17 +94,17 @@ int main(){
         else{//只有上面的一种情况才能用vip 特权剩下的一律平等都坐minidx
             if(array[early_cus].AT >= table[minidx].ET ){//最早服务的来时桌子闲着
                 printf("%02d:%02d:%02d ", array[early_cus].AT/3600, array[early_cus].AT%3600/60,
-                                array[early_cus].AT%60);
+                       array[early_cus].AT%60);
                 printf("0\n");
                 table[minidx].ET = array[early_cus].AT + array[early_cus].PT;
             }else{//最早服务的来时桌子没闲着要等待
                 printf("%02d:%02d:%02d ", table[minidx].ET/3600, table[minidx].ET%3600/60,
-                                            table[minidx].ET%60);
-                printf("%d\n", (table[minidx].ET-array[minidx].AT + 30)/60);
+                       table[minidx].ET%60);
+                printf("%d\n", (table[minidx].ET-array[early_cus].AT+30)/60);
                 table[minidx].ET += array[early_cus].PT;
             }
             table[minidx].SN++;
-        }    
+        }
     }
     for(i = 1; i <= table_num; i++){
         if( i == 1) printf("%d", table[i].SN);
