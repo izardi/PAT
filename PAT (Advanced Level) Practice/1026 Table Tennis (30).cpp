@@ -30,56 +30,51 @@ int main(){
     scanf("%d %d", &x, &y);
     for(i = 1; i <= x; i++) table[i] = {28800, 0, 0};
     for(i = 0; i < y; i++){ scanf("%d", &z); table[z].vip = 1; }
-    //读入完毕
+
     sort(array, array+len, cmp);
     for( i = 0; i < len; ){
         if(!vis[i]){
-            int early_cus = i, mini, flag = 1, vip = 0, minTime = 123456789, minidx;
+            int early_cus = i, flag = 1, vip = 0, minTime = 123456789, minidx;
+
             for(j = 1; j <= x; j++){
+                if(table[j].ET <= array[early_cus].AT)
+                    table[j].ET = array[early_cus].AT;
                 if(table[j].ET < minTime){
                     minTime = table[j].ET;
                     minidx = j;
                     if(table[j].vip){ vip = j; flag = 0; }
-                    else { vip = 0; flag = 0; }
+                    else { vip = 0; flag = 1; }
                 }
-                else if(flag && table[j].ET == minTime){ flag = 0; vip = j; }
+                else if(flag && table[j].ET == minTime && table[j].vip){ flag = 0; vip = j; }
             }//找桌子并且找相同时间的第一个vip桌子没有vip = 0
             if(table[minidx].ET >= 21 * 3600) break;
-            
-            for(j = i; j < len; j++)
-                if(!vis[j]){
-                    if(array[j].AT <= minTime && array[j].vip){
-                        early_cus = j;
-                        break;
+
+            z = (table[minidx].ET - array[early_cus].AT) > 0 ? (table[minidx].ET - array[early_cus].AT) : 0;
+
+            if(!array[early_cus].vip && vip){//当前不是vip并且有vip桌子查找是否有满足的vip用户
+                for(j = i+1; j < len; j++){
+                    if(!vis[j]){
+                        if((array[j].AT-z) <= table[minidx].ET){//只要在z等待时间内到也算到队列中
+                            if(array[j].vip){
+                                early_cus = j;
+                                break;
+                            }
+                        }
+                        else break;
                     }
-                    else break;
-                }//找最早服务的人
-            
-            if(array[early_cus].vip && vip) minidx = vip;
-            for(j = i+1; j < len; j++)
-                if(!vis[j]){
-                    mini = j;
-                    break;
                 }
-            
-            if(array[early_cus].AT >= table[minidx].ET || array[early_cus].AT < 28800 ){
-                printTime(array[early_cus].AT);
-                printTime(table[minidx].ET);
-                printf("%d\n", (table[minidx].ET-array[early_cus].AT+30)/60);
-                table[minidx].ET = array[early_cus].AT + array[early_cus].PT;
-                table[minidx].SN++;
-            }else{//最早服务的来时桌子没闲着要等待
-                for(j = 1; j <= x; j++)
-                    if(table[j].ET < array[early_cus].AT)
-                        table[j].ET = array[early_cus].AT;
-                continue;
             }
-            for(j = 1; j <= x; j++)
-                if(table[j].ET < array[mini].AT)
-                    table[j].ET = array[mini].AT;
+
+            if(array[early_cus].vip && vip) minidx = vip;
+
+            printTime(array[early_cus].AT);
+            printTime(table[minidx].ET);
+            printf("%d\n", (table[minidx].ET-array[early_cus].AT+30)/60);
+            table[minidx].ET += array[early_cus].PT;
+
+            table[minidx].SN++;
             vis[early_cus] = true;
-        }
-        i++;
+        }else i++;
     }
     for(i = 1; i <= x; i++){
         if( i == 1) printf("%d", table[i].SN);
