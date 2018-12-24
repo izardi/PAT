@@ -36,7 +36,7 @@ void dfs(struct Node *root, int depth){
 
 int main(){
 	int N, tmp;
-	freopen("data.in", "r", stdin);
+	// freopen("data.in", "r", stdin);
 	scanf("%d", &N);
 	struct Node *root = NULL;
 	for(int i = 0; i < N; ++i){

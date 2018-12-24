@@ -3,7 +3,7 @@
 using namespace std;
 
 int main(){
-	freopen("data.in", "r", stdin);
+	// freopen("data.in", "r", stdin);
 	int N, data[1005] = {0};
 	scanf("%d", &N);
 	int sum = 0;
