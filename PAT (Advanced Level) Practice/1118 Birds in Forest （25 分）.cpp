@@ -23,7 +23,7 @@ void Union(int a, int b){
 }
 
 int main(){
-	freopen("data.in", "r", stdin);
+	// freopen("data.in", "r", stdin);
 	int N, k, B, fB;
 	scanf("%d", &N);
 	for(int i = 1; i <10005; ++i)
