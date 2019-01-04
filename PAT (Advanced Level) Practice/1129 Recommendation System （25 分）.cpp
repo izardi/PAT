@@ -9,7 +9,7 @@ struct node{
 };
 
 int main(){
-	freopen("data.in", "r", stdin);
+	// freopen("data.in", "r", stdin);
 	int i, N, K, num, book[50005] = {0};
 	scanf("%d %d", &N, &K);
 	set<node> S;
