@@ -20,7 +20,7 @@ bool cmp(const Node &a, const Node &b){
 }
 
 int main(){
-	freopen("data.in", "r", stdin);
+	// freopen("data.in", "r", stdin);
 	struct Node pList[100005];
 	scanf("%d %d %d", &N, &L, &H);
 	int cnt = 0;
