@@ -15,7 +15,7 @@ int main(){
 	}
     N = 0;
 	for(tmp = head; tmp != -1; N++, tmp = List[tmp].next);
-	
+
 	int cnt = N / K;
 	int pre, cur, next, tmprear;
 	next = head;
@@ -36,8 +36,8 @@ int main(){
 			}
 		}
 	}
+
 	List[rear].next = next;
-	
 	for(head = List[100004].next; List[head].next != -1; head = List[head].next)
         printf("%05d %d %05d\n", head, List[head].data, List[head].next);
     printf("%05d %d -1", head, List[head].data);
