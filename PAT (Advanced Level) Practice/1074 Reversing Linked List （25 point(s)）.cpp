@@ -14,6 +14,7 @@ int main(){
         scanf("%d %d", &List[tmp].data, &List[tmp].next);
     }
     N = 0;
+<<<<<<< HEAD
     for(tmp = head; tmp != -1; N++, tmp = List[tmp].next);
     
     int cnt = N / K;
@@ -39,6 +40,33 @@ int main(){
     List[rear].next = next;
     
     for(head = List[100004].next; List[head].next != -1; head = List[head].next)
+=======
+	for(tmp = head; tmp != -1; N++, tmp = List[tmp].next);
+
+	int cnt = N / K;
+	int pre, cur, next, tmprear;
+	next = head;
+	int rear = 100004;
+    List[rear].next = head;
+	while(cnt--){
+		pre = -1;
+		for(int i = 0; i < K; ++i){
+			if(!i)
+				tmprear = next;
+			cur = next;
+			next = List[next].next;
+			List[cur].next = pre;
+			pre = cur;
+			if(i == K-1){
+				List[rear].next = cur;
+				rear = tmprear;
+			}
+		}
+	}
+
+	List[rear].next = next;
+	for(head = List[100004].next; List[head].next != -1; head = List[head].next)
+>>>>>>> 1d1434f31efc53e7c10ce04d607d58fd7868ced5
         printf("%05d %d %05d\n", head, List[head].data, List[head].next);
     printf("%05d %d -1", head, List[head].data);
     return 0;
