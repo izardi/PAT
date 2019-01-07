@@ -13,9 +13,9 @@ bool vis[MAXV] = {false};
 int road[MAXV];
 
 void Dijkstra(int s){
-	for(int i = 0; i < N; i++) road[i] = i;
-	dis[s] = 0;
-	cost[s] = 0;
+    for(int i = 0; i < N; i++) road[i] = i;
+    dis[s] = 0;
+    cost[s] = 0;
     for(int i = 0; i < N; i++){
         int u = -1, Min = INF;
         for(int j = 0; j < N; j++){
@@ -57,20 +57,20 @@ int main(){
     scanf("%d %d %d %d",&N, &M, &S, &D);
     int u, v;
     
-	for(int i = 0; i < N; i++){
+    for(int i = 0; i < N; i++){
         cost[i] = dis[i] = INF;
-		for(int j = 0; j < N; j++)
+        for(int j = 0; j < N; j++)
             G[i][j].distance = G[i][j].toll = INF;
-	}
+    }
     
-	for(int i = 0; i < M; i++){
+    for(int i = 0; i < M; i++){
         scanf("%d %d", &u, &v);
         scanf("%d %d", &G[u][v].distance, &G[u][v].toll);
         G[v][u].distance = G[u][v].distance;
         G[v][u].toll = G[u][v].toll;
     }
     
-	Dijkstra(S);
+    Dijkstra(S);
     DFS(D);
     printf("%d %d\n", dis[D], cost[D]);
     return 0;

@@ -4,10 +4,10 @@
 using namespace std;
 
 int main(){
-	freopen("data.in", "r", stdin);
+    freopen("data.in", "r", stdin);
     int N, M, K, data, s1, s2, common;
     set<int> SET[50];
-	
+    
     scanf("%d", &N);
     for(int i = 0; i < N; ++i){
         scanf("%d", &M);

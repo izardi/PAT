@@ -25,46 +25,46 @@ int main(){
         int idx, num;
         scanf("%d %d", &idx, &num);
         for(int j = 0; j < num; j++){
-	    scanf("%s", tmp);
-	    struct Node* tmpNode = (struct Node*)malloc(sizeof(struct Node));
-	    tmpNode->data = idx;
-	    tmpNode->next = NULL;
+        scanf("%s", tmp);
+        struct Node* tmpNode = (struct Node*)malloc(sizeof(struct Node));
+        tmpNode->data = idx;
+        tmpNode->next = NULL;
             if(!array[str_to_num(tmp)]){
-	        array[str_to_num(tmp)] = tmpNode; 
-	    }
-	    else{
-	        tmpNode->next = array[str_to_num(tmp)];
-	        array[str_to_num(tmp)] = tmpNode;	
-	    }	   
-       	}	
+            array[str_to_num(tmp)] = tmpNode; 
+        }
+        else{
+            tmpNode->next = array[str_to_num(tmp)];
+            array[str_to_num(tmp)] = tmpNode;   
+        }      
+        }   
     }
     for(int i = 0; i < N; i++){
         scanf("%s", tmp);
         printf("%s", tmp);
         int count = 0;
         rear = array[str_to_num(tmp)];
-	int tmparray[2500];
+    int tmparray[2500];
         while(rear){
             tmparray[count++] = rear->data;
-            rear = rear->next;	    
-	}
-	printf(" %d", count);
-	if(count){
+            rear = rear->next;      
+    }
+    printf(" %d", count);
+    if(count){
             sort(tmparray, tmparray+count);
             for(int j = 0; j < count; j++)
-		printf(" %d", tmparray[j]);	    
-	}
-	if(i != N-1)
-	    printf("\n");
+        printf(" %d", tmparray[j]);     
+    }
+    if(i != N-1)
+        printf("\n");
     }
 
     for(int i = 0; i < 200000; i++){
-	rear = array[i];
-	while(rear){
+    rear = array[i];
+    while(rear){
             array[i] = rear->next;
-	    free(rear);	
-	    rear = array[i];    
-	}
+        free(rear); 
+        rear = array[i];    
+    }
     }
     return 0;
 }
