@@ -6,7 +6,7 @@ struct Node{
 }List[100005];
 
 int main(){
-    freopen("data.in", "r", stdin);
+    // freopen("data.in", "r", stdin);
     int head, N, K, tmp;
     scanf("%d %d %d", &head, &N, &K);
     for(int i = 0; i < N; ++i){
