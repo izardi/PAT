@@ -4,7 +4,7 @@
 using namespace std;
 
 int main(){
-	freopen("data.in", "r", stdin);
+	// freopen("data.in", "r", stdin);
 	int N, i, j;
 	scanf("%d\n", &N);
 	string ans;
