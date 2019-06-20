@@ -4,12 +4,12 @@ using namespace std;
 int N, fir[105], sec[105];
 
 int main(){
-	// freopen("data.in", "r", stdin);
-	scanf("%d", &N);
-	for(int i = 0; i < N; ++i)
-		scanf("%d", &fir[i]);
-	for(int i = 0; i < N; ++i)
-		scanf("%d", &sec[i]);
+    // freopen("data.in", "r", stdin);
+    scanf("%d", &N);
+    for(int i = 0; i < N; ++i)
+        scanf("%d", &fir[i]);
+    for(int i = 0; i < N; ++i)
+        scanf("%d", &sec[i]);
     int i, j;
     for(i = 0; i < N - 1 && sec[i] <= sec[i+1]; ++i);
     for(j = i + 1; j < N && fir[j] == sec[j]; ++j);
@@ -36,5 +36,5 @@ int main(){
     printf("%d", fir[0]);
     for(int i = 1; i < N; ++i)
         printf(" %d", fir[i]);
-	return 0;
+    return 0;
 }

@@ -23,15 +23,15 @@ void buildTree(int inL, int preL, int len, int preR){
 
 
 void lca(int v1, int v2){
-	int tab[10005] = {0};
-	int tmp = hash[v1];
-	while(tmp != -1){
-		tab[tmp] = 1;
-		tmp = Father[tmp];
-	}
-	tmp = hash[v2];
-	while(!tab[tmp])
-		tmp = Father[tmp];
+    int tab[10005] = {0};
+    int tmp = hash[v1];
+    while(tmp != -1){
+        tab[tmp] = 1;
+        tmp = Father[tmp];
+    }
+    tmp = hash[v2];
+    while(!tab[tmp])
+        tmp = Father[tmp];
 
     if(tmp == hash[v1] || tmp == hash[v2])
         printf("%d is an ancestor of %d.\n", hash1[tmp], tmp == hash[v1] ? v2 : v1);
@@ -47,7 +47,7 @@ int main(){
 
     buildTree(1, 1, N, -1);
 
-	while(M--){
+    while(M--){
         scanf("%d %d", &v1, &v2);
         if( hash[v1] == 0){
             if(hash[v2] == 0){

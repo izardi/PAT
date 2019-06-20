@@ -12,7 +12,7 @@ void print(long int x, long int y){
     if(y == 0){
         printf("Inf");
         return;
-	}
+    }
     if(x == 0){
         printf("0");
         return;
