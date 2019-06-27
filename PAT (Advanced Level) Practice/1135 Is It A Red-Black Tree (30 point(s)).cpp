@@ -34,8 +34,7 @@ bool judge1(Node *root){// 判断红点的lc rc是否为黑点
 }
 
 int getNum(Node *root){// 左右子树黑点的数量
-    if(root == NULL) return 0;
-    int l = getNum(root->lc);
+    if(root == NULL) return 0; int l = getNum(root->lc);
     int r = getNum(root->rc);
     return root->data > 0 ? max(l, r)+1 : max(l, r);
 }
